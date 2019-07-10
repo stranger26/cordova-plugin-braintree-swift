@@ -1,0 +1,22 @@
+
+def packageName = getPackageName()
+
+android {
+    defaultConfig {
+        applicationId packageName
+        multiDexEnabled true
+    }
+}
+
+dependencies {
+    compile 'com.braintreepayments.api:braintree:2.12.0'
+    compile 'com.braintreepayments.api:drop-in:3.3.0'
+    compile 'io.card:android-sdk:5.5.1'
+    compile 'com.android.support:multidex:1.0.3'
+}
+
+def getPackageName() {
+    def config = file("src/main/res/xml/config.xml").getText()
+    def xml = new XmlParser(false, false).parseText(config)
+    return xml.attribute("id")
+}

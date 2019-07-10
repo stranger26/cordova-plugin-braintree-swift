@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-braintree" version="0.5.3">
+
+    <name>Braintree Plugin</name>
+
+    <description>
+        A Cordova plugin for the Braintree mobile payment processing SDK.
+    </description>
+
+    <license>MIT</license>
+
+    <!-- JavaScript Interface -->
+    <js-module src="www/braintree-plugin.js" name="BraintreePlugin">
+        <clobbers target="BraintreePlugin" />
+    </js-module>
+
+    <!-- Android Configuration -->
+    <platform name="android">
+
+        <config-file target="src/main/res/xml/config.xml" parent="/*">
+            <feature name="BraintreePlugin">
+                <param name="android-package" value="net.justincredible.BraintreePlugin" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/BraintreePlugin.java" target-dir="src/net/justincredible" />
+
+        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <activity android:name="com.braintreepayments.api.BraintreeBrowserSwitchActivity" android:launchMode="singleTask">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data android:scheme="net.justincredible.braintree" />
+                </intent-filter>
+            </activity>
+        </config-file>
+
+    </platform>
+
+    <!-- iOS Configuration -->
+    <platform name="ios">
+        <preference name="URL_SCHEME" />
+        <config-file target="config.xml" parent="/*">
+            <feature name="BraintreePlugin">
+                <param name="ios-package" value="BraintreePlugin" />
+            </feature>
+        </config-file>
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+                <string>com.paypal.ppclient.touch.v1</string>
+                <string>com.paypal.ppclient.touch.v2</string>
+            </array>
+        </config-file>
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleURLName</key>
+                    <string>cordova-plugin-braintree</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$URL_SCHEME</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+        <header-file src="src/ios/BraintreePlugin.h" />
+        <source-file src="src/ios/BraintreePlugin.swift" />
+
+        <dependency id="cordova-plugin-add-swift-support" version="^2.0.2" />
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git"/>
+            </config>
+            <pods use-frameworks="true">
+                <pod name="BraintreeDropIn" />
+                <pod name="Braintree/PayPal" />
+            </pods>
+        </podspec>
+    </platform>
+
+</plugin>
