@@ -43,7 +43,7 @@
 
     <!-- iOS Configuration -->
     <platform name="ios">
-        <preference name="URL_SCHEME" />
+        <preference name="URL_SCHEME" default="com.cubytes.braintree.payments"/>
         <config-file target="config.xml" parent="/*">
             <feature name="BraintreePlugin">
                 <param name="ios-package" value="BraintreePlugin" />
