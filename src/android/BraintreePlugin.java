@@ -1,4 +1,4 @@
-package net.justincredible;
+package com.cubytes;
 
 import android.app.Activity;
 import android.content.Intent;
