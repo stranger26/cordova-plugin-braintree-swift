@@ -28,7 +28,7 @@ import Braintree
         var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
         var response: [String:Any]!
         let request = BTDropInRequest()
-        request.amount = command.arguments[0] as? String
+        request.threeDSecureRequest?.amount = command.arguments[0] as! NSDecimalNumber
         let dropIn = BTDropInController(authorization: self.token, request: request)
         { (controller, result, error) in
             if (error != nil) {
