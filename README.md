@@ -12,7 +12,7 @@ To add the plugin to your Cordova project, first remove the iOS platform, instal
 
 ```bash
     cordova platform remove ios
-    cordova plugin add https://github.com/sumbria/cordova-plugin-braintree --variable URL_SCHEME=<Bundle Identifier>.payments
+    cordova plugin add https://github.com/sumbria/cordova-plugin-braintree-swift --variable URL_SCHEME=<Bundle Identifier>.payments
     cordova platform add ios
 ```
 
